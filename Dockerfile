@@ -56,6 +56,9 @@ WORKDIR /opt/guacamole
 # Copy artifacts from builder image into this image
 COPY --from=builder /opt/guacamole/ .
 
+# Copy custom Tomcat server.xml for nginx reverse proxy with ssl termination headers.
+COPY server.xml /usr/local/tomcat/conf/server.xml
+
 # Start Guacamole under Tomcat, listening on 0.0.0.0:8080
 EXPOSE 8080
 CMD ["/opt/guacamole/bin/start.sh" ]
